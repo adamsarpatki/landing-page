@@ -70,6 +70,10 @@ section {
     text-align: right;
 }
 
+li {
+    margin: 0.3em 1em;
+}
+
 .navbar__menu li {
     display: inline-block;
 }
@@ -91,6 +95,7 @@ section {
 /* Header Styles */
 .page__header {
     background: #fff;
+    opacity: 0.7;
     position: fixed;
     top: 0;
     width: 100%;
