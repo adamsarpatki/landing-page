@@ -34,8 +34,18 @@ nested for looppal, és ifekkel vizsgálni, hogy mik a value-k, és annak megfel
 a DocumentFragmenthez őket? .setAttribute vagy .classList és .add() etc. is jó lehet */
 
 let buffer = document.createDocumentFragment();
+const pageNavbar = document.querySelector("#page-nav");
+const navList = document.createElement("ul");
 
 for (section of sectionContents) {
+    const navElement = document.createElement("li");
+    navElement.setAttribute("class", "nav-element");
+    const navLink = document.createElement("a");
+    navLink.href = `#${section.id}`;
+    navLink.textContent = section.title;
+    navElement.appendChild(navLink);
+    navList.appendChild(navElement);
+
     const container = document.createElement('section');
     container.setAttribute("id", section.id);
     container.setAttribute("data-nav", section.dataNav);
@@ -54,5 +64,6 @@ for (section of sectionContents) {
     buffer.appendChild(container);
 }
 
+pageNavbar.appendChild(navList);
 const sectionsDiv = document.querySelector('#sections');
 sectionsDiv.appendChild(buffer);
