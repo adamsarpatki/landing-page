@@ -39,7 +39,7 @@ const navList = document.querySelector("#navbar__list");
 
 for (section of sectionContents) {
     const navElement = document.createElement("li");
-    // navElement.setAttribute("class", "nav-element");
+    navElement.setAttribute("class", "menu__link");
     const navLink = document.createElement("a");
     navLink.setAttribute("class", ".menu__link");
     navLink.href = `#${section.id}`;
