@@ -68,11 +68,6 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
-/* #navbar__menu #navbar__list {
-    display: grid;
-    grid-auto-columns: minmax(auto, auto);
-    grid-auto-rows: 1fr;
-} */
 
 .navbar__menu ul {
     padding-left: 0;

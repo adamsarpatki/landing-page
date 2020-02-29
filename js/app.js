@@ -37,12 +37,23 @@ let buffer = document.createDocumentFragment();
 const pageNavbar = document.querySelector(".navbar__menu");
 const navList = document.querySelector("#navbar__list");
 
+function addActiveClass (event) {
+    const allSections = document.querySelectorAll("section");
+    for (section of allSections) {
+        if (section.className != null) {
+            section.classList.remove("your-active-class");
+        }
+    }
+    document.querySelector(event.target.hash).setAttribute("class", "your-active-class");
+}
+
 for (section of sectionContents) {
     const navElement = document.createElement("li");
     navElement.setAttribute("class", "menu__link");
     const navLink = document.createElement("a");
     navLink.setAttribute("class", ".menu__link");
     navLink.href = `#${section.id}`;
+    navLink.addEventListener("click", addActiveClass);
     navLink.textContent = section.title;
     navElement.appendChild(navLink);
     navList.appendChild(navElement);
@@ -68,3 +79,4 @@ for (section of sectionContents) {
 pageNavbar.appendChild(navList);
 const sectionsDiv = document.querySelector('#sections');
 sectionsDiv.appendChild(buffer);
+
