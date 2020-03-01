@@ -34,12 +34,12 @@ function addActiveClass (event) {
     document.querySelector(event.target.hash).setAttribute("class", "your-active-class");
 }
 
+// Function to generate navigation elements
 function generateNavigation(section) {
     const navElement = document.createElement("li");
     navElement.setAttribute("id", `nav-${section.id}`)
     navElement.setAttribute("class", "menu__link");
     const navLink = document.createElement("a");
-    // navLink.setAttribute("class", "menu__link");
     navLink.href = `#${section.id}`;
     navLink.addEventListener("click", addActiveClass);
     navLink.textContent = section.title;
@@ -47,6 +47,7 @@ function generateNavigation(section) {
     return navElement;
 }
 
+//Function to generate contents of section elements
 function generateSectionContainerContent(section) {
     const containerContent = document.createElement('div');
     containerContent.setAttribute("class", "landing__container");
@@ -62,6 +63,7 @@ function generateSectionContainerContent(section) {
     return containerContent;
 }
 
+//Function to generate HTML section elements
 function generateSectionContainer(section) {
     const container = document.createElement('section');
     container.setAttribute("id", section.id);
