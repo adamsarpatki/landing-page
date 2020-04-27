@@ -6,14 +6,14 @@ let sectionContents = [
         title: "Section 1",
         textContentOne: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum metus faucibus lectus pharetra dapibus. Suspendisse potenti. Aenean aliquam elementum mi, ac euismod augue. Donec eget lacinia ex. Phasellus imperdiet porta orci eget mollis. Sed convallis sollicitudin mauris ac tincidunt. Donec bibendum, nulla eget bibendum consectetur, sem nisi aliquam leo, ut pulvinar quam nunc eu augue. Pellentesque maximus imperdiet elit a pharetra. Duis lectus mi, aliquam in mi quis, aliquam porttitor lacus. Morbi a tincidunt felis. Sed leo nunc, pharetra et elementum non, faucibus vitae elit. Integer nec libero venenatis libero ultricies molestie semper in tellus. Sed congue et odio sed euismod.",
         textContentTwo: "Aliquam a convallis justo. Vivamus venenatis, erat eget pulvinar gravida, ipsum lacus aliquet velit, vel luctus diam ipsum a diam. Cras eu tincidunt arcu, vitae rhoncus purus. Vestibulum fermentum consectetur porttitor. Suspendisse imperdiet porttitor tortor, eget elementum tortor mollis non.",
-    }, 
+    },
     {
         id: "section2",
         dataNav: "Section 2",
         title: "Section 2",
         textContentOne: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum metus faucibus lectus pharetra dapibus. Suspendisse potenti. Aenean aliquam elementum mi, ac euismod augue. Donec eget lacinia ex. Phasellus imperdiet porta orci eget mollis. Sed convallis sollicitudin mauris ac tincidunt. Donec bibendum, nulla eget bibendum consectetur, sem nisi aliquam leo, ut pulvinar quam nunc eu augue. Pellentesque maximus imperdiet elit a pharetra. Duis lectus mi, aliquam in mi quis, aliquam porttitor lacus. Morbi a tincidunt felis. Sed leo nunc, pharetra et elementum non, faucibus vitae elit. Integer nec libero venenatis libero ultricies molestie semper in tellus. Sed congue et odio sed euismod.",
         textContentTwo: "Aliquam a convallis justo. Vivamus venenatis, erat eget pulvinar gravida, ipsum lacus aliquet velit, vel luctus diam ipsum a diam. Cras eu tincidunt arcu, vitae rhoncus purus. Vestibulum fermentum consectetur porttitor. Suspendisse imperdiet porttitor tortor, eget elementum tortor mollis non.",
-    }, 
+    },
     {
         id: "section3",
         dataNav: "Section 3",
@@ -29,18 +29,6 @@ let sectionContents = [
         textContentTwo: "Aliquam a convallis justo. Vivamus venenatis, erat eget pulvinar gravida, ipsum lacus aliquet velit, vel luctus diam ipsum a diam. Cras eu tincidunt arcu, vitae rhoncus purus. Vestibulum fermentum consectetur porttitor. Suspendisse imperdiet porttitor tortor, eget elementum tortor mollis non.",
     },];
 
-
-// Function to add "your-active-class" class to sections after click event on nav
-function addActiveClass (event) {
-    const allSections = document.querySelectorAll("section");
-    for (let section of allSections) {
-        if (section.className != null) {
-            section.classList.remove("your-active-class");
-        }
-    }
-    document.querySelector(event.target.hash).setAttribute("class", "your-active-class");
-}
-
 // Function to generate navigation elements
 function generateNavigation(section) {
     const navElement = document.createElement("li");
@@ -48,7 +36,6 @@ function generateNavigation(section) {
     navElement.setAttribute("class", "menu__link");
     const navLink = document.createElement("a");
     navLink.href = `#${section.id}`;
-    navLink.addEventListener("click", addActiveClass);
     navLink.textContent = section.title;
     navElement.appendChild(navLink);
     return navElement;
@@ -99,6 +86,27 @@ function generateSections() {
     // Append sections to div
     const sectionsDiv = document.querySelector('#sections');
     sectionsDiv.appendChild(buffer);
+    makeActive();
 }
 
 generateSections();
+
+function makeActive() {
+    const allSections = document.querySelectorAll("section");
+    for (const section of allSections) {
+        const box = section.getBoundingClientRect();
+        if (box.top <= 500 && box.bottom >= 500) {
+            section.setAttribute("class", "your-active-class");
+            document.getElementById(`nav-${section.id}`).classList.add("highlighted");
+            // Apply active state on the current section and the corresponding Nav link.
+        } else {
+            section.removeAttribute("class", "your-active-class");
+            document.getElementById(`nav-${section.id}`).classList.remove("highlighted");
+            // Remove active state from other section and corresponding Nav link.
+        }
+    }
+}
+
+document.addEventListener("scroll", function () {
+    makeActive();
+});
